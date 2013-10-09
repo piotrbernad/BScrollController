@@ -81,8 +81,14 @@ typedef enum {
         case UIGestureRecognizerStateCancelled : {
             if (!_collectionHasItemsToShow) {
                 [UIView animateWithDuration:animationTime animations:^{
-                    CGRect endRect = CGRectMake(0, 0, boundsW, boundsH);
-                    [_snapshotView setFrame:endRect];
+                    if (_scrollDirection == BSScrollDirectionFromBottomToTop) {
+                        CGRect endRect = CGRectMake(0, 0, boundsW, boundsH);
+                        [_snapshotView setFrame:endRect];
+                    } else {
+                        CGRect endRect = CGRectMake(0, -boundsH, boundsW, boundsH);
+                        [_snapshotView setFrame:endRect];
+                    }
+                    
                 } completion:^(BOOL finished) {
                     [_snapshotView removeFromSuperview];
                     _snapshotView = nil;
@@ -96,7 +102,7 @@ typedef enum {
             // gesture is canceled and snapshot view backs to start frame
             if (!_collectionHasItemsToShow) {
                 // prevents skip to next items
-                translate.y = 50.0f;
+                translate.y = _scrollDirection == BSScrollDirectionFromBottomToTop ? -50.0f : 50.0f;
                 sender.enabled = NO;
                 sender.enabled = YES;
             }
@@ -131,11 +137,16 @@ typedef enum {
 
             else {
                 [UIView animateWithDuration:animationTime animations:^{
-                    [_snapshotView setFrame:self.view.bounds];
+                    if (_scrollDirection == BSScrollDirectionFromBottomToTop) {
+                        CGRect endRect = CGRectMake(0, 0, boundsW, boundsH);
+                        [_snapshotView setFrame:endRect];
+                    } else {
+                        CGRect endRect = CGRectMake(0, -boundsH, boundsW, boundsH);
+                        [_snapshotView setFrame:endRect];
+                    }
                 } completion:^(BOOL finished) {
                     [_delegate parentViewControllerWantsRollBack:self];
                     if (_scrollDirection == BSScrollDirectionFromTopToBottom) {
-                        [_snapshotsArray removeLastObject];
                         [_snapshotView removeFromSuperview];
                         _snapshotView = nil;
                     } else {
