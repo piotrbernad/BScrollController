@@ -28,7 +28,10 @@
                [UIImage imageNamed:@"3.png"],
                [UIImage imageNamed:@"1.jpg"],
                [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"man2 blur.jpg"]];
+               [UIImage imageNamed:@"man2 blur.jpg"],
+               [UIImage imageNamed:@"kawa.jpg"],
+               [UIImage imageNamed:@"man.jpg"],
+               [UIImage imageNamed:@"3.png"]];
     
     _currentPage = 0;
     

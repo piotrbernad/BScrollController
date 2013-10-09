@@ -175,12 +175,12 @@ typedef enum {
         default:
             break;
     }
-    
+    /* to discuss, if shadow is needed, because of performance decrease
     _snapshotView.layer.shadowColor = [[UIColor blackColor] CGColor];
     _snapshotView.layer.shadowOffset = CGSizeMake(-5.0f, 10.0f);
     _snapshotView.layer.shadowOpacity = 1.0f;
     _snapshotView.layer.shadowRadius = 40.0f;
-
+     */
     [self.view addSubview:_snapshotView];
     
 }

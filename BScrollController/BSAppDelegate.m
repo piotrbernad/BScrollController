@@ -16,13 +16,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     BSCollectionLayout *layout = [[BSCollectionLayout alloc] init];
     BSCollectionViewController *collectionViewController = [[BSCollectionViewController alloc] initWithCollectionViewLayout:layout];
     collectionViewController.itemsPerPage = 3;
+    
     BSViewController *parentViewController = [[BSViewController alloc] init];
     [parentViewController setCollectionViewController:collectionViewController];
-    [_window setRootViewController:parentViewController];
     
+    [_window setRootViewController:parentViewController];
     [_window makeKeyAndVisible];
     
     return YES;
