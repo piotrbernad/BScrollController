@@ -7,12 +7,24 @@
 //
 
 #import "BSAppDelegate.h"
+#import "BSViewController.h"
+#import "BSCollectionViewController.h"
+#import "BSCollectionLayout.h"
 
 @implementation BSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    
+    BSCollectionLayout *layout = [[BSCollectionLayout alloc] init];
+    BSCollectionViewController *collectionViewController = [[BSCollectionViewController alloc] initWithCollectionViewLayout:layout];
+    collectionViewController.itemsPerPage = 3;
+    BSViewController *parentViewController = [[BSViewController alloc] init];
+    [parentViewController setCollectionViewController:collectionViewController];
+    [_window setRootViewController:parentViewController];
+    
+    [_window makeKeyAndVisible];
+    
     return YES;
 }
 							
