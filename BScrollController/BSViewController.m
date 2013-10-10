@@ -8,7 +8,7 @@
 
 #import "BSViewController.h"
 #import "BSCollectionViewController.h"
-
+#import "BPullToRefreshView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define minTranslateYToSkip 0.35
@@ -31,7 +31,9 @@ typedef enum {
     UIImageView *_snapshotView;
     BSScrollDirection _scrollDirection;
     BOOL _collectionHasItemsToShow;
+    BOOL _isOnTop;
     NSMutableArray *_snapshotsArray;
+    BPullToRefreshView *_pullToRefresh;
 }
 
 - (void)viewDidLoad
@@ -56,6 +58,11 @@ typedef enum {
         case UIGestureRecognizerStateBegan:
             
             _scrollDirection = BSScrollDirectionUnknown;
+            _isOnTop = NO;
+            
+            [_pullToRefresh removeFromSuperview];
+            _pullToRefresh = nil;
+            
             break;
             
         case UIGestureRecognizerStateChanged: {
@@ -67,11 +74,17 @@ typedef enum {
             }
             
             if (!_snapshotView) {
-                sender.enabled = NO;
-                sender.enabled = YES;
+                [self addSnapshotViewOnTopWithDirection:BSScrollDirectionFromBottomToTop];
+                [self addPullToRefreshView];
+                
+                // add pull to refresh view here
+                _isOnTop = YES;
             }
-            
-            if (_collectionHasItemsToShow || abs(translate.y) < 50.0f) {
+            if (_isOnTop && _scrollDirection == BSScrollDirectionFromTopToBottom && abs(translate.y) < 80.0f) {
+                [_pullToRefresh setProgress:translate.y/80.0f];
+                CGRect newRect = CGRectMake(0, translate.y, boundsW, boundsH);
+                [_snapshotView setFrame:newRect];
+            } else if (_collectionHasItemsToShow || abs(translate.y) < 50.0f) {
                 
                 if (_scrollDirection == BSScrollDirectionFromTopToBottom) {
                     CGRect newRect = CGRectMake(0, -boundsH + translate.y, boundsW, boundsH);
@@ -87,6 +100,7 @@ typedef enum {
         }
         case UIGestureRecognizerStateCancelled : {
             if (!_collectionHasItemsToShow) {
+                
                 [UIView animateWithDuration:animationTime animations:^{
                     if (_scrollDirection == BSScrollDirectionFromBottomToTop) {
                         CGRect endRect = CGRectMake(0, 0, boundsW, boundsH);
@@ -107,13 +121,31 @@ typedef enum {
         case UIGestureRecognizerStateEnded: {
             
             // gesture is canceled and snapshot view backs to start frame
-            if (!_collectionHasItemsToShow) {
+            if (!_collectionHasItemsToShow && !_isOnTop) {
                 // prevents skip to next items
                 translate.y = _scrollDirection == BSScrollDirectionFromBottomToTop ? -50.0f : 50.0f;
                 sender.enabled = NO;
                 sender.enabled = YES;
             }
             
+            if(_isOnTop) {
+                 if (abs(translate.y) >= 75.0f) {
+                     [_pullToRefresh setProgress:1.0f];
+                 }
+                [UIView animateWithDuration:animationTime animations:^{
+                    CGRect endRect = CGRectMake(0.0f, 0.0f, boundsW, boundsH);
+                    [_snapshotView setFrame:endRect];
+                } completion:^(BOOL finished) {
+                    if (abs(translate.y) >= 75.0f) {
+                        
+                        [_delegate parentViewControllerDidPullToRefresh:self];
+                        [_pullToRefresh removeFromSuperview];
+                        _pullToRefresh = nil;
+                    }
+                }];
+                return;
+            }
+
 
             if (_scrollDirection == BSScrollDirectionFromBottomToTop && translate.y < - minTranslateYToSkip * boundsH) {
                 
@@ -153,13 +185,8 @@ typedef enum {
                     }
                 } completion:^(BOOL finished) {
                     [_delegate parentViewControllerWantsRollBack:self];
-                    if (_scrollDirection == BSScrollDirectionFromTopToBottom) {
-                        [_snapshotView removeFromSuperview];
-                        _snapshotView = nil;
-                    } else {
-                        [_snapshotView removeFromSuperview];
-                        _snapshotView = nil;
-                    }
+                    [_snapshotView removeFromSuperview];
+                    _snapshotView = nil;
                 }];
                 
             }
@@ -170,7 +197,15 @@ typedef enum {
     }
 }
 
+- (void)addPullToRefreshView {
+    _pullToRefresh = [[BPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 80.0f)];
+    [self.view insertSubview:_pullToRefresh belowSubview:_snapshotView];
+}
+
 - (void)addSnapshotViewOnTopWithDirection:(BSScrollDirection)direction {
+    
+    [_pullToRefresh removeFromSuperview];
+    _pullToRefresh = nil;
     
     [_snapshotView removeFromSuperview];
     _snapshotView = nil;

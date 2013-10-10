@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2452519A1806A8550085AF7A /* BPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251991806A8550085AF7A /* BPullToRefreshView.m */; };
 		24E6568618053C6200E36ADA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568518053C6200E36ADA /* Foundation.framework */; };
 		24E6568818053C6200E36ADA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568718053C6200E36ADA /* CoreGraphics.framework */; };
 		24E6568A18053C6200E36ADA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568918053C6200E36ADA /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		245251981806A8550085AF7A /* BPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPullToRefreshView.h; sourceTree = "<group>"; };
+		245251991806A8550085AF7A /* BPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPullToRefreshView.m; sourceTree = "<group>"; };
 		24E6568218053C6200E36ADA /* BScrollController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BScrollController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24E6568518053C6200E36ADA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		24E6568718053C6200E36ADA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -149,6 +152,8 @@
 				24E656BC18053C7500E36ADA /* 3.png */,
 				24E6569D18053C6200E36ADA /* Images.xcassets */,
 				24E6568C18053C6200E36ADA /* Supporting Files */,
+				245251981806A8550085AF7A /* BPullToRefreshView.h */,
+				245251991806A8550085AF7A /* BPullToRefreshView.m */,
 			);
 			path = BScrollController;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				24E656C818053DEE00E36ADA /* BSCollectionLayout.m in Sources */,
 				24E656C218053C9400E36ADA /* BSImageCell.m in Sources */,
 				24E6569218053C6200E36ADA /* main.m in Sources */,
+				2452519A1806A8550085AF7A /* BPullToRefreshView.m in Sources */,
 				24E6569618053C6200E36ADA /* BSAppDelegate.m in Sources */,
 				24E656C518053CB600E36ADA /* BSCollectionViewController.m in Sources */,
 			);
@@ -495,6 +501,7 @@
 				24E656B618053C6200E36ADA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		24E656B718053C6200E36ADA /* Build configuration list for PBXNativeTarget "BScrollControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +510,7 @@
 				24E656B918053C6200E36ADA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

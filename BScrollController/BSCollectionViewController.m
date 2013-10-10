@@ -28,6 +28,40 @@
                [UIImage imageNamed:@"3.png"],
                [UIImage imageNamed:@"1.jpg"],
                [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"man.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"man.jpg"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"man.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"man.jpg"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
+               [UIImage imageNamed:@"3.png"],
+               [UIImage imageNamed:@"1.jpg"],
+               [UIImage imageNamed:@"2.png"],
                [UIImage imageNamed:@"man2 blur.jpg"],
                [UIImage imageNamed:@"kawa.jpg"],
                [UIImage imageNamed:@"man.jpg"],
@@ -36,6 +70,7 @@
     _currentPage = 0;
     
     [self.collectionView registerClass:[BSImageCell class] forCellWithReuseIdentifier:@"ImageCell"];
+    [self.collectionView setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -43,7 +78,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _itemsPerPage;
+    return [self currentItems].count;
 }
 
 - (BSImageCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,7 +91,14 @@
 }
 
 - (NSArray *)currentItems {
-    NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_currentPage * _itemsPerPage, _itemsPerPage)];
+    NSIndexSet *indexes;
+    if ((_currentPage * _itemsPerPage) + _itemsPerPage < [_items count]) {
+        indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_currentPage * _itemsPerPage, _itemsPerPage)];
+    } else {
+        NSInteger _itemsOnPage = _items.count - _currentPage * _itemsPerPage;
+        indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_currentPage * _itemsPerPage, _itemsOnPage)];
+    }
+    
     NSArray *items = [_items objectsAtIndexes:indexes];
     return items;
 }
@@ -65,7 +107,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(320, floorf(CGRectGetHeight(self.view.bounds)/3.0f));
+    return CGSizeMake(CGRectGetWidth(self.view.bounds), floorf(CGRectGetHeight(self.view.bounds)/[collectionView numberOfItemsInSection:0]));
 }
 
 #pragma mark - BScroll Delegate 
@@ -106,6 +148,10 @@
     if (forward == NO) {
         [self.collectionView reloadData];
     }
+}
+- (void)parentViewControllerDidPullToRefresh:(BSViewController *)parent {
+    NSLog(@"pull to refresh");
+    [self.collectionView reloadData];
 }
 
 @end
