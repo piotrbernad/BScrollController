@@ -7,29 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2452519A1806A8550085AF7A /* BPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251991806A8550085AF7A /* BPullToRefreshView.m */; };
+		245251A61806BD6B0085AF7A /* BPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2452519D1806BD6B0085AF7A /* BPullToRefreshView.m */; };
+		245251A71806BD6B0085AF7A /* BSCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */; };
+		245251A81806BD6B0085AF7A /* BSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251A11806BD6B0085AF7A /* BSCollectionViewController.m */; };
+		245251A91806BD6B0085AF7A /* BSImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251A31806BD6B0085AF7A /* BSImageCell.m */; };
+		245251AA1806BD6B0085AF7A /* BSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251A51806BD6B0085AF7A /* BSViewController.m */; };
+		245251B21806BD910085AF7A /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 245251AC1806BD910085AF7A /* 1.jpg */; };
+		245251B31806BD910085AF7A /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 245251AD1806BD910085AF7A /* 2.png */; };
+		245251B41806BD910085AF7A /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 245251AE1806BD910085AF7A /* 3.png */; };
+		245251B51806BD910085AF7A /* kawa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 245251AF1806BD910085AF7A /* kawa.jpg */; };
+		245251B61806BD910085AF7A /* man.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 245251B01806BD910085AF7A /* man.jpg */; };
+		245251B71806BD910085AF7A /* man2 blur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 245251B11806BD910085AF7A /* man2 blur.jpg */; };
 		24E6568618053C6200E36ADA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568518053C6200E36ADA /* Foundation.framework */; };
 		24E6568818053C6200E36ADA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568718053C6200E36ADA /* CoreGraphics.framework */; };
 		24E6568A18053C6200E36ADA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568918053C6200E36ADA /* UIKit.framework */; };
 		24E6569018053C6200E36ADA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24E6568E18053C6200E36ADA /* InfoPlist.strings */; };
 		24E6569218053C6200E36ADA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E6569118053C6200E36ADA /* main.m */; };
 		24E6569618053C6200E36ADA /* BSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E6569518053C6200E36ADA /* BSAppDelegate.m */; };
-		24E6569C18053C6200E36ADA /* BSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E6569B18053C6200E36ADA /* BSViewController.m */; };
 		24E6569E18053C6200E36ADA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24E6569D18053C6200E36ADA /* Images.xcassets */; };
 		24E656A518053C6200E36ADA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E656A418053C6200E36ADA /* XCTest.framework */; };
 		24E656A618053C6200E36ADA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568518053C6200E36ADA /* Foundation.framework */; };
 		24E656A718053C6200E36ADA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568918053C6200E36ADA /* UIKit.framework */; };
 		24E656AF18053C6200E36ADA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24E656AD18053C6200E36ADA /* InfoPlist.strings */; };
 		24E656B118053C6200E36ADA /* BScrollControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E656B018053C6200E36ADA /* BScrollControllerTests.m */; };
-		24E656BD18053C7500E36ADA /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24E656BA18053C7500E36ADA /* 1.jpg */; };
-		24E656BE18053C7500E36ADA /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 24E656BB18053C7500E36ADA /* 2.png */; };
-		24E656BF18053C7500E36ADA /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 24E656BC18053C7500E36ADA /* 3.png */; };
-		24E656C218053C9400E36ADA /* BSImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E656C118053C9400E36ADA /* BSImageCell.m */; };
-		24E656C518053CB600E36ADA /* BSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E656C418053CB600E36ADA /* BSCollectionViewController.m */; };
-		24E656C818053DEE00E36ADA /* BSCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E656C718053DEE00E36ADA /* BSCollectionLayout.m */; };
-		24E656D118055D6B00E36ADA /* kawa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24E656CF18055D6B00E36ADA /* kawa.jpg */; };
-		24E656D218055D6B00E36ADA /* man.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24E656D018055D6B00E36ADA /* man.jpg */; };
-		24E656D418055EFD00E36ADA /* man2 blur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24E656D318055EFD00E36ADA /* man2 blur.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,8 +43,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		245251981806A8550085AF7A /* BPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPullToRefreshView.h; sourceTree = "<group>"; };
-		245251991806A8550085AF7A /* BPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPullToRefreshView.m; sourceTree = "<group>"; };
+		2452519C1806BD6B0085AF7A /* BPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPullToRefreshView.h; path = Classes/BPullToRefreshView.h; sourceTree = "<group>"; };
+		2452519D1806BD6B0085AF7A /* BPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPullToRefreshView.m; path = Classes/BPullToRefreshView.m; sourceTree = "<group>"; };
+		2452519E1806BD6B0085AF7A /* BSCollectionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCollectionLayout.h; path = Classes/BSCollectionLayout.h; sourceTree = "<group>"; };
+		2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCollectionLayout.m; path = Classes/BSCollectionLayout.m; sourceTree = "<group>"; };
+		245251A01806BD6B0085AF7A /* BSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCollectionViewController.h; path = Classes/BSCollectionViewController.h; sourceTree = "<group>"; };
+		245251A11806BD6B0085AF7A /* BSCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCollectionViewController.m; path = Classes/BSCollectionViewController.m; sourceTree = "<group>"; };
+		245251A21806BD6B0085AF7A /* BSImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSImageCell.h; path = Classes/BSImageCell.h; sourceTree = "<group>"; };
+		245251A31806BD6B0085AF7A /* BSImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSImageCell.m; path = Classes/BSImageCell.m; sourceTree = "<group>"; };
+		245251A41806BD6B0085AF7A /* BSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSViewController.h; path = Classes/BSViewController.h; sourceTree = "<group>"; };
+		245251A51806BD6B0085AF7A /* BSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSViewController.m; path = Classes/BSViewController.m; sourceTree = "<group>"; };
+		245251AC1806BD910085AF7A /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		245251AD1806BD910085AF7A /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		245251AE1806BD910085AF7A /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		245251AF1806BD910085AF7A /* kawa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kawa.jpg; sourceTree = "<group>"; };
+		245251B01806BD910085AF7A /* man.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = man.jpg; sourceTree = "<group>"; };
+		245251B11806BD910085AF7A /* man2 blur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "man2 blur.jpg"; sourceTree = "<group>"; };
 		24E6568218053C6200E36ADA /* BScrollController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BScrollController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24E6568518053C6200E36ADA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		24E6568718053C6200E36ADA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,26 +69,12 @@
 		24E6569318053C6200E36ADA /* BScrollController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BScrollController-Prefix.pch"; sourceTree = "<group>"; };
 		24E6569418053C6200E36ADA /* BSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSAppDelegate.h; sourceTree = "<group>"; };
 		24E6569518053C6200E36ADA /* BSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BSAppDelegate.m; sourceTree = "<group>"; };
-		24E6569A18053C6200E36ADA /* BSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSViewController.h; sourceTree = "<group>"; };
-		24E6569B18053C6200E36ADA /* BSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BSViewController.m; sourceTree = "<group>"; };
 		24E6569D18053C6200E36ADA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		24E656A318053C6200E36ADA /* BScrollControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BScrollControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24E656A418053C6200E36ADA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		24E656AC18053C6200E36ADA /* BScrollControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BScrollControllerTests-Info.plist"; sourceTree = "<group>"; };
 		24E656AE18053C6200E36ADA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		24E656B018053C6200E36ADA /* BScrollControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BScrollControllerTests.m; sourceTree = "<group>"; };
-		24E656BA18053C7500E36ADA /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
-		24E656BB18053C7500E36ADA /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		24E656BC18053C7500E36ADA /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		24E656C018053C9400E36ADA /* BSImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSImageCell.h; sourceTree = "<group>"; };
-		24E656C118053C9400E36ADA /* BSImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSImageCell.m; sourceTree = "<group>"; };
-		24E656C318053CB600E36ADA /* BSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCollectionViewController.h; sourceTree = "<group>"; };
-		24E656C418053CB600E36ADA /* BSCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSCollectionViewController.m; sourceTree = "<group>"; };
-		24E656C618053DEE00E36ADA /* BSCollectionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCollectionLayout.h; sourceTree = "<group>"; };
-		24E656C718053DEE00E36ADA /* BSCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSCollectionLayout.m; sourceTree = "<group>"; };
-		24E656CF18055D6B00E36ADA /* kawa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kawa.jpg; sourceTree = "<group>"; };
-		24E656D018055D6B00E36ADA /* man.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = man.jpg; sourceTree = "<group>"; };
-		24E656D318055EFD00E36ADA /* man2 blur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "man2 blur.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +101,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2452519B1806BC8F0085AF7A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				24E6569418053C6200E36ADA /* BSAppDelegate.h */,
+				24E6569518053C6200E36ADA /* BSAppDelegate.m */,
+				2452519C1806BD6B0085AF7A /* BPullToRefreshView.h */,
+				2452519D1806BD6B0085AF7A /* BPullToRefreshView.m */,
+				2452519E1806BD6B0085AF7A /* BSCollectionLayout.h */,
+				2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */,
+				245251A01806BD6B0085AF7A /* BSCollectionViewController.h */,
+				245251A11806BD6B0085AF7A /* BSCollectionViewController.m */,
+				245251A21806BD6B0085AF7A /* BSImageCell.h */,
+				245251A31806BD6B0085AF7A /* BSImageCell.m */,
+				245251A41806BD6B0085AF7A /* BSViewController.h */,
+				245251A51806BD6B0085AF7A /* BSViewController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		245251AB1806BD910085AF7A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				245251AC1806BD910085AF7A /* 1.jpg */,
+				245251AD1806BD910085AF7A /* 2.png */,
+				245251AE1806BD910085AF7A /* 3.png */,
+				245251AF1806BD910085AF7A /* kawa.jpg */,
+				245251B01806BD910085AF7A /* man.jpg */,
+				245251B11806BD910085AF7A /* man2 blur.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		24E6567918053C6200E36ADA = {
 			isa = PBXGroup;
 			children = (
@@ -134,26 +166,9 @@
 		24E6568B18053C6200E36ADA /* BScrollController */ = {
 			isa = PBXGroup;
 			children = (
-				24E6569418053C6200E36ADA /* BSAppDelegate.h */,
-				24E6569518053C6200E36ADA /* BSAppDelegate.m */,
-				24E656C018053C9400E36ADA /* BSImageCell.h */,
-				24E656C118053C9400E36ADA /* BSImageCell.m */,
-				24E656C318053CB600E36ADA /* BSCollectionViewController.h */,
-				24E656C418053CB600E36ADA /* BSCollectionViewController.m */,
-				24E6569A18053C6200E36ADA /* BSViewController.h */,
-				24E6569B18053C6200E36ADA /* BSViewController.m */,
-				24E656C618053DEE00E36ADA /* BSCollectionLayout.h */,
-				24E656C718053DEE00E36ADA /* BSCollectionLayout.m */,
-				24E656CF18055D6B00E36ADA /* kawa.jpg */,
-				24E656D018055D6B00E36ADA /* man.jpg */,
-				24E656D318055EFD00E36ADA /* man2 blur.jpg */,
-				24E656BA18053C7500E36ADA /* 1.jpg */,
-				24E656BB18053C7500E36ADA /* 2.png */,
-				24E656BC18053C7500E36ADA /* 3.png */,
+				2452519B1806BC8F0085AF7A /* Classes */,
 				24E6569D18053C6200E36ADA /* Images.xcassets */,
 				24E6568C18053C6200E36ADA /* Supporting Files */,
-				245251981806A8550085AF7A /* BPullToRefreshView.h */,
-				245251991806A8550085AF7A /* BPullToRefreshView.m */,
 			);
 			path = BScrollController;
 			sourceTree = "<group>";
@@ -161,6 +176,7 @@
 		24E6568C18053C6200E36ADA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				245251AB1806BD910085AF7A /* images */,
 				24E6568D18053C6200E36ADA /* BScrollController-Info.plist */,
 				24E6568E18053C6200E36ADA /* InfoPlist.strings */,
 				24E6569118053C6200E36ADA /* main.m */,
@@ -264,14 +280,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				245251B41806BD910085AF7A /* 3.png in Resources */,
+				245251B51806BD910085AF7A /* kawa.jpg in Resources */,
+				245251B21806BD910085AF7A /* 1.jpg in Resources */,
 				24E6569E18053C6200E36ADA /* Images.xcassets in Resources */,
-				24E656D118055D6B00E36ADA /* kawa.jpg in Resources */,
-				24E656BD18053C7500E36ADA /* 1.jpg in Resources */,
-				24E656BE18053C7500E36ADA /* 2.png in Resources */,
-				24E656BF18053C7500E36ADA /* 3.png in Resources */,
+				245251B31806BD910085AF7A /* 2.png in Resources */,
 				24E6569018053C6200E36ADA /* InfoPlist.strings in Resources */,
-				24E656D218055D6B00E36ADA /* man.jpg in Resources */,
-				24E656D418055EFD00E36ADA /* man2 blur.jpg in Resources */,
+				245251B61806BD910085AF7A /* man.jpg in Resources */,
+				245251B71806BD910085AF7A /* man2 blur.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,13 +306,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24E6569C18053C6200E36ADA /* BSViewController.m in Sources */,
-				24E656C818053DEE00E36ADA /* BSCollectionLayout.m in Sources */,
-				24E656C218053C9400E36ADA /* BSImageCell.m in Sources */,
 				24E6569218053C6200E36ADA /* main.m in Sources */,
-				2452519A1806A8550085AF7A /* BPullToRefreshView.m in Sources */,
+				245251A61806BD6B0085AF7A /* BPullToRefreshView.m in Sources */,
+				245251AA1806BD6B0085AF7A /* BSViewController.m in Sources */,
+				245251A71806BD6B0085AF7A /* BSCollectionLayout.m in Sources */,
 				24E6569618053C6200E36ADA /* BSAppDelegate.m in Sources */,
-				24E656C518053CB600E36ADA /* BSCollectionViewController.m in Sources */,
+				245251A91806BD6B0085AF7A /* BSImageCell.m in Sources */,
+				245251A81806BD6B0085AF7A /* BSCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
