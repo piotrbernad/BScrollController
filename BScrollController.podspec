@@ -6,7 +6,8 @@ Pod::Spec.new do |s|
 		'Piotr Bernad' => 'piotr.bernad@appunite.com'
 	}
 	s.ios.deployment_target = '6.0'
-	s.summary = ''
+	s.summary = 'Simple grouped scroll controller for UICollectionViewController items'
+	s.license      = { :type => 'MIT' }
 	s.ios.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/../../BScrollController/**' }
 	s.homepage = 'http://github.com/piotrbernad/BScrollController'
 	s.source = {
