@@ -35,33 +35,6 @@
                [UIImage imageNamed:@"1.jpg"],
                [UIImage imageNamed:@"2.png"],
                [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"man.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"man.jpg"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"man.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"man.jpg"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
                [UIImage imageNamed:@"man2 blur.jpg"],
                [UIImage imageNamed:@"kawa.jpg"],
                [UIImage imageNamed:@"man.jpg"],
@@ -92,6 +65,7 @@
 
 - (NSArray *)currentItems {
     NSIndexSet *indexes;
+    
     if ((_currentPage * _itemsPerPage) + _itemsPerPage < [_items count]) {
         indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_currentPage * _itemsPerPage, _itemsPerPage)];
     } else {
@@ -99,11 +73,7 @@
         indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_currentPage * _itemsPerPage, _itemsOnPage)];
     }
     
-    NSArray *items = [_items objectsAtIndexes:indexes];
-    return items;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [_items objectsAtIndexes:indexes];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,26 +86,25 @@
     
     _beforeChangeIndex = _currentPage;
     switch (forward) {
-    case YES:
-        if ((_currentPage + 1) * _itemsPerPage < [_items count]) {
-            _currentPage++;
-            [self.collectionView reloadData];
-            break;
-        } else {
-            return NO;
-        }
-    case NO:
-        if (_currentPage - 1 >= 0) {
-            _currentPage--;
-            break;
-        } else {
-            return NO;
-        }
+        case YES:
+            if ((_currentPage + 1) * _itemsPerPage < [_items count]) {
+                _currentPage++;
+                [self.collectionView reloadData];
+                break;
+            } else {
+                return NO;
+            }
+        case NO:
+            if (_currentPage - 1 >= 0) {
+                _currentPage--;
+                break;
+            } else {
+                return NO;
+            }
     }
     
     
     return YES;
-    
 }
 
 - (void)parentViewControllerWantsRollBack:(BSViewController *)parent {
