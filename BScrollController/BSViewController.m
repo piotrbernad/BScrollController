@@ -13,6 +13,7 @@
 
 #define minTranslateYToSkip 0.35
 #define animationTime 0.25f
+#define translationAccelerate 1.5f
 
 @interface BSViewController ()
 
@@ -47,6 +48,7 @@ typedef enum {
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)sender {
     
     CGPoint translate = [sender translationInView:self.view];
+    translate.y = translate.y * translationAccelerate;
     CGFloat boundsW = CGRectGetWidth(self.view.bounds);
     CGFloat boundsH = CGRectGetHeight(self.view.bounds);
     
@@ -62,6 +64,11 @@ typedef enum {
                 _scrollDirection = translate.y < 0 ? BSScrollDirectionFromBottomToTop : BSScrollDirectionFromTopToBottom;
                 [self addSnapshotViewOnTopWithDirection:_scrollDirection];
                 _collectionHasItemsToShow = [_delegate parentViewController:self wantsItemsForward: _scrollDirection == BSScrollDirectionFromTopToBottom ? NO : YES];
+            }
+            
+            if (!_snapshotView) {
+                sender.enabled = NO;
+                sender.enabled = YES;
             }
             
             if (_collectionHasItemsToShow || abs(translate.y) < 50.0f) {
@@ -176,12 +183,8 @@ typedef enum {
         case BSScrollDirectionFromTopToBottom:
             if ([_snapshotsArray lastObject]) {
                 _snapshotView = [[UIImageView alloc] initWithImage:[_snapshotsArray lastObject]];
-            } else {
-                #warning TODO - if image not exist
-                _snapshotView = [[UIImageView alloc] initWithImage:[[UIImage alloc] init]];
+                [_snapshotView setFrame:CGRectMake(0, -CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
             }
-            
-            [_snapshotView setFrame:CGRectMake(0, -CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
             break;
         default:
             break;
