@@ -7,9 +7,8 @@
 //
 
 #import "BSAppDelegate.h"
-#import "BSViewController.h"
-#import "BSCollectionViewController.h"
-#import "BSCollectionLayout.h"
+#import "BSExampleViewController.h"
+
 
 @implementation BSAppDelegate
 
@@ -17,13 +16,8 @@
 {
     
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    BSCollectionLayout *layout = [[BSCollectionLayout alloc] init];
-    BSCollectionViewController *collectionViewController = [[BSCollectionViewController alloc] initWithCollectionViewLayout:layout];
-    collectionViewController.itemsPerPage = 3;
-    
-    BSViewController *parentViewController = [[BSViewController alloc] init];
-    [parentViewController setCollectionViewController:collectionViewController];
+ 
+    BSExampleViewController *parentViewController = [[BSExampleViewController alloc] init];
     
     [_window setRootViewController:parentViewController];
     [_window makeKeyAndVisible];

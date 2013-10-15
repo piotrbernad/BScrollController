@@ -30,7 +30,8 @@
 		24E656A718053C6200E36ADA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568918053C6200E36ADA /* UIKit.framework */; };
 		24E656AF18053C6200E36ADA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24E656AD18053C6200E36ADA /* InfoPlist.strings */; };
 		24E656B118053C6200E36ADA /* BScrollControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E656B018053C6200E36ADA /* BScrollControllerTests.m */; };
-		24F1F19A180D5AD300EDEA32 /* BSImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F1F199180D5AD300EDEA32 /* BSImageCell.m */; };
+		24F1F1A3180D5B8000EDEA32 /* BSExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F1F1A0180D5B8000EDEA32 /* BSExampleViewController.m */; };
+		24F1F1A4180D5B8000EDEA32 /* BSImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F1F1A2180D5B8000EDEA32 /* BSImageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,16 +69,18 @@
 		24E6568F18053C6200E36ADA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		24E6569118053C6200E36ADA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		24E6569318053C6200E36ADA /* BScrollController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BScrollController-Prefix.pch"; sourceTree = "<group>"; };
-		24E6569418053C6200E36ADA /* BSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSAppDelegate.h; sourceTree = "<group>"; };
-		24E6569518053C6200E36ADA /* BSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BSAppDelegate.m; sourceTree = "<group>"; };
+		24E6569418053C6200E36ADA /* BSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BSAppDelegate.h; path = ../BSAppDelegate.h; sourceTree = "<group>"; };
+		24E6569518053C6200E36ADA /* BSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BSAppDelegate.m; path = ../BSAppDelegate.m; sourceTree = "<group>"; };
 		24E6569D18053C6200E36ADA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		24E656A318053C6200E36ADA /* BScrollControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BScrollControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24E656A418053C6200E36ADA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		24E656AC18053C6200E36ADA /* BScrollControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BScrollControllerTests-Info.plist"; sourceTree = "<group>"; };
 		24E656AE18053C6200E36ADA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		24E656B018053C6200E36ADA /* BScrollControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BScrollControllerTests.m; sourceTree = "<group>"; };
-		24F1F198180D5AD300EDEA32 /* BSImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSImageCell.h; sourceTree = "<group>"; };
-		24F1F199180D5AD300EDEA32 /* BSImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSImageCell.m; sourceTree = "<group>"; };
+		24F1F19F180D5B8000EDEA32 /* BSExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSExampleViewController.h; sourceTree = "<group>"; };
+		24F1F1A0180D5B8000EDEA32 /* BSExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSExampleViewController.m; sourceTree = "<group>"; };
+		24F1F1A1180D5B8000EDEA32 /* BSImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSImageCell.h; sourceTree = "<group>"; };
+		24F1F1A2180D5B8000EDEA32 /* BSImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSImageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +119,6 @@
 		2452519B1806BC8F0085AF7A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				24E6569418053C6200E36ADA /* BSAppDelegate.h */,
-				24E6569518053C6200E36ADA /* BSAppDelegate.m */,
 				2452519C1806BD6B0085AF7A /* BSPullToRefreshView.h */,
 				2452519D1806BD6B0085AF7A /* BSPullToRefreshView.m */,
 				2452519E1806BD6B0085AF7A /* BSCollectionLayout.h */,
@@ -177,7 +178,7 @@
 		24E6568B18053C6200E36ADA /* BScrollController */ = {
 			isa = PBXGroup;
 			children = (
-				24F1F197180D5AD300EDEA32 /* Example Cell */,
+				24F1F19E180D5B8000EDEA32 /* Example */,
 				2452519B1806BC8F0085AF7A /* Classes */,
 				24E6569D18053C6200E36ADA /* Images.xcassets */,
 				24E6568C18053C6200E36ADA /* Supporting Files */,
@@ -215,13 +216,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		24F1F197180D5AD300EDEA32 /* Example Cell */ = {
+		24F1F19E180D5B8000EDEA32 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				24F1F198180D5AD300EDEA32 /* BSImageCell.h */,
-				24F1F199180D5AD300EDEA32 /* BSImageCell.m */,
+				24E6569418053C6200E36ADA /* BSAppDelegate.h */,
+				24E6569518053C6200E36ADA /* BSAppDelegate.m */,
+				24F1F19F180D5B8000EDEA32 /* BSExampleViewController.h */,
+				24F1F1A0180D5B8000EDEA32 /* BSExampleViewController.m */,
+				24F1F1A1180D5B8000EDEA32 /* BSImageCell.h */,
+				24F1F1A2180D5B8000EDEA32 /* BSImageCell.m */,
 			);
-			path = "Example Cell";
+			path = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,10 +332,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24F1F19A180D5AD300EDEA32 /* BSImageCell.m in Sources */,
+				24F1F1A3180D5B8000EDEA32 /* BSExampleViewController.m in Sources */,
 				240626931807E8B8003A468A /* ODRefreshControl.m in Sources */,
 				24E6569218053C6200E36ADA /* main.m in Sources */,
 				245251A61806BD6B0085AF7A /* BSPullToRefreshView.m in Sources */,
+				24F1F1A4180D5B8000EDEA32 /* BSImageCell.m in Sources */,
 				245251AA1806BD6B0085AF7A /* BSViewController.m in Sources */,
 				245251A71806BD6B0085AF7A /* BSCollectionLayout.m in Sources */,
 				24E6569618053C6200E36ADA /* BSAppDelegate.m in Sources */,
