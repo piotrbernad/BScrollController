@@ -9,17 +9,7 @@
 #import "BSPullToRefreshView.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define beginRed 0.80f
-#define beginGreen 0.80f
-#define beginBlue 0.80f
-
-#define destinationRed 0.88f
-#define destinationGreen 0.07f
-#define destinationBlue 0.44f
-
 @implementation BSPullToRefreshView {
-    UILabel *_textLabel;
-    
     BOOL _isAnimating;
     NSTimer *_rotationTimer;
 }
@@ -39,8 +29,16 @@
         [_textLabel setBackgroundColor:[UIColor clearColor]];
         [self addSubview:_textLabel];
         
+        _iconView = [[UIView alloc] init];
+        [self addSubview:_iconView];
+        
+        
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    [_iconView setCenter:CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - 10.0f)];
 }
 
 - (void)setProgress:(CGFloat)progress {
@@ -51,7 +49,6 @@
         [_textLabel setText:@"Upuść aby odświeżyć"];
     }
     [_textLabel setNeedsDisplay];
-    
 }
 
 - (void)startAnimating {
@@ -65,7 +62,8 @@
 
 - (void)animateRotation {
     [UIView animateWithDuration:0.005f animations:^{
-
+        CGAffineTransform transform = CGAffineTransformRotate(_iconView.transform, M_PI/180);
+        [_iconView setTransform:transform];
     }];
 }
 
@@ -79,12 +77,21 @@
     } else if (_isAnimating == YES) {
         [self stopAnimating];
     }
-    
-    
 }
 
 - (BSPullToRefreshState)state {
     return _state;
 }
+
+- (void)setIconView:(UIView *)iconView {
+    if (_iconView != iconView) {
+        [iconView removeFromSuperview];
+        
+        _iconView = iconView;
+        [self addSubview:_iconView];
+        [self setNeedsDisplay];
+    }
+}
+
 
 @end

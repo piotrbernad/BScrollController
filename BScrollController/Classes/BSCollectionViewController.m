@@ -8,62 +8,41 @@
 
 #import "BSCollectionViewController.h"
 #import "BSImageCell.h"
+#import "BSViewController.h"
 
 @interface BSCollectionViewController ()
 
 @end
 
-@implementation BSCollectionViewController {
-    NSArray *_items;
-    
+@implementation BSCollectionViewController {    
     NSInteger _beforeChangeIndex;
+}
+
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
+    self = [super init];
+    if (self) {
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+        [self.view addSubview:_collectionView];
+    }
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    _items = @[[UIImage imageNamed:@"kawa.jpg"],
-               [UIImage imageNamed:@"man.jpg"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"1.jpg"],
-               [UIImage imageNamed:@"2.png"],
-               [UIImage imageNamed:@"3.png"],
-               [UIImage imageNamed:@"man2 blur.jpg"],
-               [UIImage imageNamed:@"kawa.jpg"],
-               [UIImage imageNamed:@"man.jpg"],
-               [UIImage imageNamed:@"3.png"]];
-    
     _currentPage = 0;
-    
-    [self.collectionView registerClass:[BSImageCell class] forCellWithReuseIdentifier:@"ImageCell"];
     [self.collectionView setBackgroundColor:[UIColor whiteColor]];
+    [self.collectionView setScrollEnabled:NO];
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self currentItems].count;
-}
-
-- (BSImageCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
     
-    BSImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
-    [cell.imageView setImage:[[self currentItems] objectAtIndex:indexPath.item]];
-    [cell.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    [cell.imageView setClipsToBounds:YES];
-    return cell;
+    [_collectionView setFrame:self.view.bounds];
 }
 
-- (NSArray *)currentItems {
+- (NSArray *)visibleItems {
     NSIndexSet *indexes;
     
     if ((_currentPage * _itemsPerPage) + _itemsPerPage < [_items count]) {
@@ -77,13 +56,10 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)/[collectionView numberOfItemsInSection:0]);
+    return CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)/[collectionView numberOfItemsInSection:0]);
 }
 
-#pragma mark - BScroll Delegate 
-
-- (BOOL)parentViewController:(BSViewController *)parent wantsItemsForward:(BOOL)forward {
-    
+- (BOOL)parentViewControllerWantsItemsForward:(BOOL)forward {
     _beforeChangeIndex = _currentPage;
     switch (forward) {
         case YES:
@@ -102,24 +78,26 @@
                 return NO;
             }
     }
-    
-    
     return YES;
 }
 
-- (void)parentViewControllerWantsRollBack:(BSViewController *)parent {
+- (void)parentViewControllerWantsRollBack {
     _currentPage = _beforeChangeIndex;
     [self.collectionView reloadData];
 }
 
-- (void)parentViewController:(BSViewController *)parent didFinishAnimatingForward:(BOOL)forward {
-    
+- (void)parentViewControllerDidFinishAnimatingForward:(BOOL)forward {
     if (forward == NO) {
         [self.collectionView reloadData];
     }
 }
-- (void)parentViewControllerDidEndPullToRefresh:(BSViewController *)parent {
-    NSLog(@"pull to refresh");
+
+- (void)parentViewControllerDidEndPullToRefresh {
+    [self.collectionView reloadData];
+}
+
+- (void)setItems:(NSArray *)items {
+    _items = items;
     [self.collectionView reloadData];
 }
 

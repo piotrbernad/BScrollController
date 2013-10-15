@@ -11,7 +11,6 @@
 		245251A61806BD6B0085AF7A /* BSPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2452519D1806BD6B0085AF7A /* BSPullToRefreshView.m */; };
 		245251A71806BD6B0085AF7A /* BSCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */; };
 		245251A81806BD6B0085AF7A /* BSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251A11806BD6B0085AF7A /* BSCollectionViewController.m */; };
-		245251A91806BD6B0085AF7A /* BSImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251A31806BD6B0085AF7A /* BSImageCell.m */; };
 		245251AA1806BD6B0085AF7A /* BSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251A51806BD6B0085AF7A /* BSViewController.m */; };
 		245251B21806BD910085AF7A /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 245251AC1806BD910085AF7A /* 1.jpg */; };
 		245251B31806BD910085AF7A /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 245251AD1806BD910085AF7A /* 2.png */; };
@@ -31,6 +30,7 @@
 		24E656A718053C6200E36ADA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E6568918053C6200E36ADA /* UIKit.framework */; };
 		24E656AF18053C6200E36ADA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24E656AD18053C6200E36ADA /* InfoPlist.strings */; };
 		24E656B118053C6200E36ADA /* BScrollControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E656B018053C6200E36ADA /* BScrollControllerTests.m */; };
+		24F1F19A180D5AD300EDEA32 /* BSImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F1F199180D5AD300EDEA32 /* BSImageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +52,6 @@
 		2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCollectionLayout.m; path = Classes/BSCollectionLayout.m; sourceTree = "<group>"; };
 		245251A01806BD6B0085AF7A /* BSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCollectionViewController.h; path = Classes/BSCollectionViewController.h; sourceTree = "<group>"; };
 		245251A11806BD6B0085AF7A /* BSCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCollectionViewController.m; path = Classes/BSCollectionViewController.m; sourceTree = "<group>"; };
-		245251A21806BD6B0085AF7A /* BSImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSImageCell.h; path = Classes/BSImageCell.h; sourceTree = "<group>"; };
-		245251A31806BD6B0085AF7A /* BSImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSImageCell.m; path = Classes/BSImageCell.m; sourceTree = "<group>"; };
 		245251A41806BD6B0085AF7A /* BSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSViewController.h; path = Classes/BSViewController.h; sourceTree = "<group>"; };
 		245251A51806BD6B0085AF7A /* BSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSViewController.m; path = Classes/BSViewController.m; sourceTree = "<group>"; };
 		245251AC1806BD910085AF7A /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
@@ -78,6 +76,8 @@
 		24E656AC18053C6200E36ADA /* BScrollControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BScrollControllerTests-Info.plist"; sourceTree = "<group>"; };
 		24E656AE18053C6200E36ADA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		24E656B018053C6200E36ADA /* BScrollControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BScrollControllerTests.m; sourceTree = "<group>"; };
+		24F1F198180D5AD300EDEA32 /* BSImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSImageCell.h; sourceTree = "<group>"; };
+		24F1F199180D5AD300EDEA32 /* BSImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSImageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +124,6 @@
 				2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */,
 				245251A01806BD6B0085AF7A /* BSCollectionViewController.h */,
 				245251A11806BD6B0085AF7A /* BSCollectionViewController.m */,
-				245251A21806BD6B0085AF7A /* BSImageCell.h */,
-				245251A31806BD6B0085AF7A /* BSImageCell.m */,
 				245251A41806BD6B0085AF7A /* BSViewController.h */,
 				245251A51806BD6B0085AF7A /* BSViewController.m */,
 			);
@@ -179,6 +177,7 @@
 		24E6568B18053C6200E36ADA /* BScrollController */ = {
 			isa = PBXGroup;
 			children = (
+				24F1F197180D5AD300EDEA32 /* Example Cell */,
 				2452519B1806BC8F0085AF7A /* Classes */,
 				24E6569D18053C6200E36ADA /* Images.xcassets */,
 				24E6568C18053C6200E36ADA /* Supporting Files */,
@@ -214,6 +213,15 @@
 				24E656AD18053C6200E36ADA /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		24F1F197180D5AD300EDEA32 /* Example Cell */ = {
+			isa = PBXGroup;
+			children = (
+				24F1F198180D5AD300EDEA32 /* BSImageCell.h */,
+				24F1F199180D5AD300EDEA32 /* BSImageCell.m */,
+			);
+			path = "Example Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,13 +327,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24F1F19A180D5AD300EDEA32 /* BSImageCell.m in Sources */,
 				240626931807E8B8003A468A /* ODRefreshControl.m in Sources */,
 				24E6569218053C6200E36ADA /* main.m in Sources */,
 				245251A61806BD6B0085AF7A /* BSPullToRefreshView.m in Sources */,
 				245251AA1806BD6B0085AF7A /* BSViewController.m in Sources */,
 				245251A71806BD6B0085AF7A /* BSCollectionLayout.m in Sources */,
 				24E6569618053C6200E36ADA /* BSAppDelegate.m in Sources */,
-				245251A91806BD6B0085AF7A /* BSImageCell.m in Sources */,
 				245251A81806BD6B0085AF7A /* BSCollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

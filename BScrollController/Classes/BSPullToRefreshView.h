@@ -18,6 +18,9 @@ typedef enum {
     BSPullToRefreshState _state;
 }
 
+@property (strong, nonatomic) UILabel *textLabel;
+@property (strong, nonatomic) UIView *iconView;
+
 // progress value from 0 to 1 
 - (void)setProgress:(CGFloat)progress;
 

@@ -9,7 +9,7 @@
 #import "BSCollectionLayout.h"
 
 @implementation BSCollectionLayout
--(id)init {
+- (id)init {
     self = [super init];
     if (self) {
         self.minimumInteritemSpacing = 0;

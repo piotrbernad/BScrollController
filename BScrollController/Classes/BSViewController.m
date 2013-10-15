@@ -8,7 +8,6 @@
 
 #import "BSViewController.h"
 #import "BSCollectionViewController.h"
-#import "BSPullToRefreshView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define minTranslateYToSkip 0.35
@@ -26,14 +25,12 @@ typedef enum {
 } BSScrollDirection;
 
 @implementation BSViewController {
-    UICollectionViewController *_collectionViewController;
     UIPanGestureRecognizer *_panGesture;
     NSMutableArray *_snapshotsArray;
     
     BOOL _collectionHasItemsToShow;
     BOOL _isOnTop;
     
-    BSPullToRefreshView *_pullToRefresh;
     BSScrollDirection _scrollDirection;
     UIImageView *_snapshotView;
 }
@@ -50,15 +47,21 @@ typedef enum {
     
 }
 
-- (void)setCollectionViewController:(UICollectionViewController<BScrollProtocol> *)controller {
+- (void)viewWillLayoutSubviews {
+    [_collectionViewController.view setFrame:self.view.frame];
+}
+
+- (void)setCollectionViewController:(BSCollectionViewController *)controller {
     if (_collectionViewController != controller) {
         _collectionViewController = controller;
         
         [self addChildViewController:_collectionViewController];
         [self.view addSubview:_collectionViewController.collectionView];
         [_collectionViewController didMoveToParentViewController:self];
-        _delegate = _collectionViewController;
         
+        [_collectionViewController.collectionView setDelegate:_collectionViewDelegate];
+        [_collectionViewController.collectionView setDataSource:_collectionViewDelegate];
+        [_collectionViewController.collectionView setScrollEnabled:NO];
     }
 }
 
@@ -88,7 +91,7 @@ typedef enum {
                 _scrollDirection = translate.y < 0 ? BSScrollDirectionFromBottomToTop : BSScrollDirectionFromTopToBottom;
                 // add snapshot on top
                 [self addSnapshotViewOnTopWithDirection:_scrollDirection];
-                _collectionHasItemsToShow = [_delegate parentViewController:self wantsItemsForward: _scrollDirection == BSScrollDirectionFromTopToBottom ? NO : YES];
+                _collectionHasItemsToShow = [_collectionViewController parentViewControllerWantsItemsForward:_scrollDirection == BSScrollDirectionFromTopToBottom ? NO : YES];
             }
             
             // If snapshot doesnt exist -> set isOnTop
@@ -159,7 +162,7 @@ typedef enum {
                     CGRect endRect = CGRectMake(0, -boundsH, boundsW, boundsH);
                     [_snapshotView setFrame:endRect];
                 } completion:^(BOOL finished) {
-                    [_delegate parentViewController:self didFinishAnimatingForward:YES];
+                    [_collectionViewController parentViewControllerDidFinishAnimatingForward:YES];
                     [_snapshotsArray addObject:_snapshotView.image];
                     [self removeSnapshotViewFromSuperView];
                 }];
@@ -173,7 +176,7 @@ typedef enum {
                     CGRect endRect = CGRectMake(0, 0, boundsW, boundsH);
                     [_snapshotView setFrame:endRect];
                 } completion:^(BOOL finished) {
-                    [_delegate parentViewController:self didFinishAnimatingForward:NO];
+                    [_collectionViewController parentViewControllerDidFinishAnimatingForward:NO];
                     [_snapshotsArray removeLastObject];
                     [self removeSnapshotViewFromSuperView];
                 }];
@@ -190,7 +193,7 @@ typedef enum {
                         [_snapshotView setFrame:endRect];
                     }
                 } completion:^(BOOL finished) {
-                    [_delegate parentViewControllerWantsRollBack:self];
+                    [_collectionViewController parentViewControllerWantsRollBack];
                     [self removeSnapshotViewFromSuperView];
                 }];
                 
@@ -254,13 +257,13 @@ typedef enum {
 }
 
 - (void)endRefresh {
-    [_delegate parentViewControllerDidEndPullToRefresh:self];
+    [_collectionViewController parentViewControllerDidEndPullToRefresh];
     [self hidePullToRefreshAnimated:YES];
     
 }
 
 - (void)hidePullToRefreshAnimated:(BOOL)animated {
-    CGRect endRect = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
+    CGRect endRect = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     
     if (!animated) {
         [_collectionViewController.collectionView setFrame:endRect];
@@ -322,7 +325,7 @@ typedef enum {
 
 
 - (UIImage *)makeImageFromCurrentView {
-    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, [[UIScreen mainScreen] scale]);
+    UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, [[UIScreen mainScreen] scale]);
     [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
