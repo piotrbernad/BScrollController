@@ -23,6 +23,6 @@
 - (BOOL)parentViewController:(BSViewController *)parent wantsItemsForward:(BOOL)forward;
 - (void)parentViewControllerWantsRollBack:(BSViewController *)parent;
 - (void)parentViewController:(BSViewController *)parent didFinishAnimatingForward:(BOOL)forward;
-- (void)parentViewControllerDidPullToRefresh:(BSViewController *)parent;
+- (void)parentViewControllerDidEndPullToRefresh:(BSViewController *)parent;
 
 @end

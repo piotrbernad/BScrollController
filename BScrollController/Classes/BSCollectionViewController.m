@@ -77,7 +77,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(CGRectGetWidth(self.view.bounds), floorf(CGRectGetHeight(self.view.bounds)/[collectionView numberOfItemsInSection:0]));
+    return CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)/[collectionView numberOfItemsInSection:0]);
 }
 
 #pragma mark - BScroll Delegate 
@@ -118,7 +118,7 @@
         [self.collectionView reloadData];
     }
 }
-- (void)parentViewControllerDidPullToRefresh:(BSViewController *)parent {
+- (void)parentViewControllerDidEndPullToRefresh:(BSViewController *)parent {
     NSLog(@"pull to refresh");
     [self.collectionView reloadData];
 }

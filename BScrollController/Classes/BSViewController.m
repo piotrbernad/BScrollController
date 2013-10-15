@@ -8,7 +8,7 @@
 
 #import "BSViewController.h"
 #import "BSCollectionViewController.h"
-#import "BPullToRefreshView.h"
+#import "BSPullToRefreshView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define minTranslateYToSkip 0.35
@@ -33,7 +33,7 @@ typedef enum {
     BOOL _collectionHasItemsToShow;
     BOOL _isOnTop;
     
-    BPullToRefreshView *_pullToRefresh;
+    BSPullToRefreshView *_pullToRefresh;
     BSScrollDirection _scrollDirection;
     UIImageView *_snapshotView;
 }
@@ -46,6 +46,7 @@ typedef enum {
     [self.view addGestureRecognizer:_panGesture];
     
     _snapshotsArray = [[NSMutableArray alloc] init];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
 }
 
@@ -57,6 +58,7 @@ typedef enum {
         [self.view addSubview:_collectionViewController.collectionView];
         [_collectionViewController didMoveToParentViewController:self];
         _delegate = _collectionViewController;
+        
     }
 }
 
@@ -67,10 +69,16 @@ typedef enum {
     CGFloat boundsW = CGRectGetWidth(self.view.bounds);
     CGFloat boundsH = CGRectGetHeight(self.view.bounds);
     
+    if (_pullToRefresh.state == BSPullToRefreshOpened) {
+        [self hidePullToRefreshAnimated:YES];
+        return;
+    }
+    
     switch (sender.state) {
         case UIGestureRecognizerStateBegan:
             // reset all values
-            [self panGestureDidBegan];
+            _scrollDirection = BSScrollDirectionUnknown;
+            _isOnTop = NO;
             break;
             
         case UIGestureRecognizerStateChanged: {
@@ -78,25 +86,24 @@ typedef enum {
             // Determinate Scroll Direction
             if (_scrollDirection == BSScrollDirectionUnknown) {
                 _scrollDirection = translate.y < 0 ? BSScrollDirectionFromBottomToTop : BSScrollDirectionFromTopToBottom;
+                // add snapshot on top
                 [self addSnapshotViewOnTopWithDirection:_scrollDirection];
                 _collectionHasItemsToShow = [_delegate parentViewController:self wantsItemsForward: _scrollDirection == BSScrollDirectionFromTopToBottom ? NO : YES];
             }
             
-            // Is On top so add pull to refresh above snapshotview
+            // If snapshot doesnt exist -> set isOnTop
             if (!_snapshotView) {
-                [self addSnapshotViewOnTopWithDirection:BSScrollDirectionFromBottomToTop];
-                [self addPullToRefreshView];
                 _isOnTop = YES;
             }
             
-            // Is on top and pulling to refresh
-            if (_isOnTop && _scrollDirection == BSScrollDirectionFromTopToBottom && abs(translate.y) < 80.0f) {
-                [_pullToRefresh setProgress:translate.y/80.0f];
-                CGRect newRect = CGRectMake(0, translate.y, boundsW, boundsH);
-                [_snapshotView setFrame:newRect];
-                
+            // Is on top and pulling to from top to bottom, gesture is driven by handlePanGestureToPullToRefresh
+            if (_isOnTop && _scrollDirection == BSScrollDirectionFromTopToBottom) {
+                [self handlePanGestureToPullToRefresh:sender];
+                return;
+            }
+            
             // pulling snapshotview
-            } else if (_collectionHasItemsToShow || abs(translate.y) < 50.0f) {
+            else if (_collectionHasItemsToShow || abs(translate.y) < 50.0f) {
                 
                 if (_scrollDirection == BSScrollDirectionFromTopToBottom) {
                     CGRect newRect = CGRectMake(0, -boundsH + translate.y, boundsW, boundsH);
@@ -113,6 +120,7 @@ typedef enum {
         case UIGestureRecognizerStateCancelled : {
             
             // gesture was canceled - snapshot view backs to start position
+            // collection view has no more items to show, pangesture is available only for 50px
             if (!_collectionHasItemsToShow) {
                 [UIView animateWithDuration:animationTime animations:^{
                     if (_scrollDirection == BSScrollDirectionFromBottomToTop) {
@@ -123,13 +131,18 @@ typedef enum {
                         [_snapshotView setFrame:endRect];
                     }
                 } completion:^(BOOL finished) {
-                    [_snapshotView removeFromSuperview];
-                    _snapshotView = nil;
+                   [self removeSnapshotViewFromSuperView];
                 }];
             }
             break;
         }
         case UIGestureRecognizerStateEnded: {
+            
+            // pull to refresh dragging, handled by handlePanGestureToPullToRefresh
+            if (_isOnTop && _scrollDirection == BSScrollDirectionFromTopToBottom) {
+                [self handlePanGestureToPullToRefresh:sender];
+                return;
+            }
             
             // gesture is canceled and snapshot view backs to start frame
             if (!_collectionHasItemsToShow && !_isOnTop) {
@@ -139,24 +152,6 @@ typedef enum {
                 sender.enabled = YES;
             }
             
-            // pull to refresh end
-            if(_isOnTop) {
-                 if (abs(translate.y) >= 75.0f) {
-                     [_pullToRefresh setProgress:1.0f];
-                 }
-                [UIView animateWithDuration:animationTime animations:^{
-                    CGRect endRect = CGRectMake(0.0f, 0.0f, boundsW, boundsH);
-                    [_snapshotView setFrame:endRect];
-                } completion:^(BOOL finished) {
-                    if (abs(translate.y) >= 75.0f) {
-                        [_delegate parentViewControllerDidPullToRefresh:self];
-                        [_pullToRefresh removeFromSuperview];
-                        _pullToRefresh = nil;
-                    }
-                }];
-                return;
-            }
-
             // finish animation when pulling from bottom to top and asbolute translation is bigger than minimum value to change page
             if (_scrollDirection == BSScrollDirectionFromBottomToTop && translate.y < - minTranslateYToSkip * boundsH) {
                 
@@ -166,8 +161,7 @@ typedef enum {
                 } completion:^(BOOL finished) {
                     [_delegate parentViewController:self didFinishAnimatingForward:YES];
                     [_snapshotsArray addObject:_snapshotView.image];
-                    [_snapshotView removeFromSuperview];
-                    _snapshotView = nil;
+                    [self removeSnapshotViewFromSuperView];
                 }];
                 
             }
@@ -181,8 +175,7 @@ typedef enum {
                 } completion:^(BOOL finished) {
                     [_delegate parentViewController:self didFinishAnimatingForward:NO];
                     [_snapshotsArray removeLastObject];
-                    [_snapshotView removeFromSuperview];
-                    _snapshotView = nil;
+                    [self removeSnapshotViewFromSuperView];
                 }];
                 
             }
@@ -198,8 +191,7 @@ typedef enum {
                     }
                 } completion:^(BOOL finished) {
                     [_delegate parentViewControllerWantsRollBack:self];
-                    [_snapshotView removeFromSuperview];
-                    _snapshotView = nil;
+                    [self removeSnapshotViewFromSuperView];
                 }];
                 
             }
@@ -210,18 +202,105 @@ typedef enum {
     }
 }
 
+- (void)handlePanGestureToPullToRefresh:(UIPanGestureRecognizer *)sender {
+    
+    // if snapshot exist remove it from super to show pull to refresh view
+    if (_snapshotView) {
+        [self removeSnapshotViewFromSuperView];
+    }
+    
+    CGPoint translate = [sender translationInView:self.view];
+    
+    if (!_pullToRefresh && translate.y > 0.0f) {
+        [self addPullToRefreshView];
+    }
+    
+    switch (sender.state) {
+        case UIGestureRecognizerStateChanged: {
+            // draging from top to bottom - only 80px allowed
+            if (translate.y > 0.0f && translate.y < 80.0f) {
+                CGRect endRect = CGRectMake(0, translate.y, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
+                [_collectionViewController.collectionView setFrame:endRect];
+                [_pullToRefresh setProgress:abs(translate.y) / 80.0f];
+                [_pullToRefresh setState:BSPullToRefreshMoving];
+            } else if (translate.y < 0.0f && _pullToRefresh.state == (BSPullToRefreshOpened || BSPullToRefreshMoving)) {
+                [sender setEnabled:NO];
+                [sender setEnabled:YES];
+                [UIView animateWithDuration:animationTime animations:^{
+                    CGRect endRect = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
+                    [_collectionViewController.collectionView setFrame:endRect];
+                }];
+            }
+            break;
+        }
+        case UIGestureRecognizerStateEnded: {
+            if (translate.y > 80.0f) {
+                [self refreshData];
+            } else {
+                [self hidePullToRefreshAnimated:YES];
+            }
+            break;
+        }
+        default:
+            break;
+    }
+    
+
+}
+
+- (void)refreshData {
+    [_pullToRefresh setState:BSPullToRefreshOpened];
+    [self performSelector:@selector(endRefresh) withObject:nil afterDelay:2.0f];
+}
+
+- (void)endRefresh {
+    [_delegate parentViewControllerDidEndPullToRefresh:self];
+    [self hidePullToRefreshAnimated:YES];
+    
+}
+
+- (void)hidePullToRefreshAnimated:(BOOL)animated {
+    CGRect endRect = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
+    
+    if (!animated) {
+        [_collectionViewController.collectionView setFrame:endRect];
+        [self removePullToRefreshFromSuperView];
+        return;
+    }
+    
+    [UIView animateWithDuration:animationTime animations:^{
+        [_collectionViewController.collectionView setFrame:endRect];
+    } completion:^(BOOL finished) {
+        [self removePullToRefreshFromSuperView];
+    }];
+}
+
+- (void)removePullToRefreshFromSuperView {
+    [_pullToRefresh setState:BSPullToRefreshClosed];
+    [_pullToRefresh removeFromSuperview];
+    _pullToRefresh = nil;
+}
+
+- (void)removeSnapshotViewFromSuperView {
+    [_snapshotView removeFromSuperview];
+    _snapshotView = nil;
+}
+
+
 - (void)addPullToRefreshView {
-    _pullToRefresh = [[BPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 80.0f)];
-    [self.view insertSubview:_pullToRefresh belowSubview:_snapshotView];
+    
+    if (_pullToRefresh) {
+        [_pullToRefresh removeFromSuperview];
+    }
+    
+    _pullToRefresh = [[BSPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 80.0f)];
+    [self.view insertSubview:_pullToRefresh belowSubview:_collectionViewController.collectionView];
 }
 
 - (void)addSnapshotViewOnTopWithDirection:(BSScrollDirection)direction {
     
-    [_pullToRefresh removeFromSuperview];
-    _pullToRefresh = nil;
-    
-    [_snapshotView removeFromSuperview];
-    _snapshotView = nil;
+    [self removeSnapshotViewFromSuperView];
+    [self removePullToRefreshFromSuperView];
     
     switch (direction) {
         case BSScrollDirectionFromBottomToTop:
@@ -238,18 +317,6 @@ typedef enum {
             break;
     }
     [self.view addSubview:_snapshotView];
-    
-}
-
-- (void)panGestureDidBegan {
-    
-    _scrollDirection = BSScrollDirectionUnknown;
-    _isOnTop = NO;
-    
-    if (_pullToRefresh) {
-        [_pullToRefresh removeFromSuperview];
-        _pullToRefresh = nil;
-    }
     
 }
 

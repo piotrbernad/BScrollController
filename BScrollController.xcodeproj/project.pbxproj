@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		245251A61806BD6B0085AF7A /* BPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2452519D1806BD6B0085AF7A /* BPullToRefreshView.m */; };
+		240626931807E8B8003A468A /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 240626921807E8B8003A468A /* ODRefreshControl.m */; };
+		245251A61806BD6B0085AF7A /* BSPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2452519D1806BD6B0085AF7A /* BSPullToRefreshView.m */; };
 		245251A71806BD6B0085AF7A /* BSCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */; };
 		245251A81806BD6B0085AF7A /* BSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251A11806BD6B0085AF7A /* BSCollectionViewController.m */; };
 		245251A91806BD6B0085AF7A /* BSImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245251A31806BD6B0085AF7A /* BSImageCell.m */; };
@@ -43,8 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2452519C1806BD6B0085AF7A /* BPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPullToRefreshView.h; path = Classes/BPullToRefreshView.h; sourceTree = "<group>"; };
-		2452519D1806BD6B0085AF7A /* BPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPullToRefreshView.m; path = Classes/BPullToRefreshView.m; sourceTree = "<group>"; };
+		240626911807E8B8003A468A /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
+		240626921807E8B8003A468A /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
+		2452519C1806BD6B0085AF7A /* BSPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSPullToRefreshView.h; path = Classes/BSPullToRefreshView.h; sourceTree = "<group>"; };
+		2452519D1806BD6B0085AF7A /* BSPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSPullToRefreshView.m; path = Classes/BSPullToRefreshView.m; sourceTree = "<group>"; };
 		2452519E1806BD6B0085AF7A /* BSCollectionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCollectionLayout.h; path = Classes/BSCollectionLayout.h; sourceTree = "<group>"; };
 		2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCollectionLayout.m; path = Classes/BSCollectionLayout.m; sourceTree = "<group>"; };
 		245251A01806BD6B0085AF7A /* BSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCollectionViewController.h; path = Classes/BSCollectionViewController.h; sourceTree = "<group>"; };
@@ -101,13 +104,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		240626901807E8B8003A468A /* ODRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				240626911807E8B8003A468A /* ODRefreshControl.h */,
+				240626921807E8B8003A468A /* ODRefreshControl.m */,
+			);
+			path = ODRefreshControl;
+			sourceTree = "<group>";
+		};
 		2452519B1806BC8F0085AF7A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				24E6569418053C6200E36ADA /* BSAppDelegate.h */,
 				24E6569518053C6200E36ADA /* BSAppDelegate.m */,
-				2452519C1806BD6B0085AF7A /* BPullToRefreshView.h */,
-				2452519D1806BD6B0085AF7A /* BPullToRefreshView.m */,
+				2452519C1806BD6B0085AF7A /* BSPullToRefreshView.h */,
+				2452519D1806BD6B0085AF7A /* BSPullToRefreshView.m */,
 				2452519E1806BD6B0085AF7A /* BSCollectionLayout.h */,
 				2452519F1806BD6B0085AF7A /* BSCollectionLayout.m */,
 				245251A01806BD6B0085AF7A /* BSCollectionViewController.h */,
@@ -155,6 +167,7 @@
 		24E6568418053C6200E36ADA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				240626901807E8B8003A468A /* ODRefreshControl */,
 				24E6568518053C6200E36ADA /* Foundation.framework */,
 				24E6568718053C6200E36ADA /* CoreGraphics.framework */,
 				24E6568918053C6200E36ADA /* UIKit.framework */,
@@ -306,8 +319,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				240626931807E8B8003A468A /* ODRefreshControl.m in Sources */,
 				24E6569218053C6200E36ADA /* main.m in Sources */,
-				245251A61806BD6B0085AF7A /* BPullToRefreshView.m in Sources */,
+				245251A61806BD6B0085AF7A /* BSPullToRefreshView.m in Sources */,
 				245251AA1806BD6B0085AF7A /* BSViewController.m in Sources */,
 				245251A71806BD6B0085AF7A /* BSCollectionLayout.m in Sources */,
 				24E6569618053C6200E36ADA /* BSAppDelegate.m in Sources */,
