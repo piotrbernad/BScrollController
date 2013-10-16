@@ -252,6 +252,13 @@ typedef enum {
 }
 
 - (void)refreshData {
+    
+    // if starts refreshing data, make sure that pull to refresh is in the right place
+    [UIView animateWithDuration:animationTime animations:^{
+        [_pullToRefresh setProgress:1.0f];
+        CGRect endRect = CGRectMake(0, 80.0f, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
+        [_collectionViewController.collectionView setFrame:endRect];
+    }];
     [_pullToRefresh setState:BSPullToRefreshOpened];
     [self performSelector:@selector(endRefresh) withObject:nil afterDelay:2.0f];
 }
