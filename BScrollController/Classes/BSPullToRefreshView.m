@@ -45,7 +45,7 @@
     
     [_textLabel setFrame:CGRectMake(0, floorf(15.0f + (30.0f * progress)), CGRectGetWidth(self.bounds), 20.0f)];
     
-    if (progress > 0.95f) {
+    if (progress >= 1.0f) {
         [_textLabel setText:@"Upuść aby odświeżyć"];
     }
     [_textLabel setNeedsDisplay];
