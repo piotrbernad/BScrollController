@@ -60,7 +60,6 @@ typedef enum {
         [_collectionViewController didMoveToParentViewController:self];
         
         [_collectionViewController.collectionView setDelegate:_collectionViewDelegate];
-        [_collectionViewController.collectionView setDataSource:_collectionViewDelegate];
         [_collectionViewController.collectionView setScrollEnabled:NO];
     }
 }
