@@ -7,7 +7,6 @@
 //
 
 #import "BSCollectionViewController.h"
-#import "BSImageCell.h"
 #import "BSViewController.h"
 
 @interface BSCollectionViewController ()
