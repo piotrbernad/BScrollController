@@ -14,7 +14,7 @@
 #define animationTime 0.25f
 #define translationAccelerate 1.5f
 
-@interface BSViewController ()
+@interface BSViewController () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -40,6 +40,7 @@ typedef enum {
     [super viewDidLoad];
     
     _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)];
+    [_panGesture setDelegate:self];
     [self.view addGestureRecognizer:_panGesture];
     
     _snapshotsArray = [[NSMutableArray alloc] init];
@@ -62,6 +63,11 @@ typedef enum {
         [_collectionViewController.collectionView setDelegate:_collectionViewDelegate];
         [_collectionViewController.collectionView setScrollEnabled:NO];
     }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
+    CGPoint translation = [gestureRecognizer translationInView:self.view];
+    return abs(translation.y) > abs(translation.x);
 }
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)sender {
