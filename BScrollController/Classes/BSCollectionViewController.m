@@ -20,7 +20,7 @@
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
     self = [super init];
     if (self) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
         [self.view addSubview:_collectionView];
     }
     return self;
