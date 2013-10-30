@@ -12,7 +12,7 @@
 
 #define minTranslateYToSkip 0.35
 #define animationTime 0.25f
-#define translationAccelerate 1.5f
+#define translationAccelerate 1.2f
 
 @interface BSViewController () <UIGestureRecognizerDelegate>
 
@@ -61,13 +61,14 @@ typedef enum {
         [_collectionViewController didMoveToParentViewController:self];
         
         [_collectionViewController.collectionView setDelegate:_collectionViewDelegate];
+        [_collectionViewController.collectionView setDataSource:_collectionViewDelegate];
         [_collectionViewController.collectionView setScrollEnabled:NO];
     }
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
     CGPoint translation = [gestureRecognizer translationInView:self.view];
-    return abs(translation.y) > abs(translation.x);
+    return abs(translation.y) + 5.0f > abs(translation.x);
 }
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)sender {
@@ -122,6 +123,12 @@ typedef enum {
                 }
                 
             }
+            if (!_collectionHasItemsToShow) {
+                if (!self.collectionViewController.collectionView.isHidden) {
+                    [self.collectionViewController.collectionView setHidden:YES];
+                }
+                
+            }
             break;
             
         }
@@ -139,6 +146,9 @@ typedef enum {
                         [_snapshotView setFrame:endRect];
                     }
                 } completion:^(BOOL finished) {
+                    if (self.collectionViewController.collectionView.isHidden) {
+                        [self.collectionViewController.collectionView setHidden:NO];
+                    }
                    [self removeSnapshotViewFromSuperView];
                 }];
             }
@@ -198,6 +208,9 @@ typedef enum {
                         [_snapshotView setFrame:endRect];
                     }
                 } completion:^(BOOL finished) {
+                    if (self.collectionViewController.collectionView.isHidden) {
+                        [self.collectionViewController.collectionView setHidden:NO];
+                    }
                     [_collectionViewController parentViewControllerWantsRollBack];
                     [self removeSnapshotViewFromSuperView];
                 }];

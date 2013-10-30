@@ -19,5 +19,5 @@
 
 @property (strong, nonatomic) BSCollectionViewController *collectionViewController;
 @property (strong, nonatomic) BSPullToRefreshView *pullToRefresh;
-@property (strong, nonatomic) id<UICollectionViewDelegate> collectionViewDelegate;
+@property (strong, nonatomic) id<UICollectionViewDelegate, UICollectionViewDataSource> collectionViewDelegate;
 @end
