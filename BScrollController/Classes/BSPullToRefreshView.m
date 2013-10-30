@@ -23,7 +23,7 @@
         
         _textLabel = [[UILabel alloc] init];
         [_textLabel setFrame:CGRectMake(0, 15.0f, CGRectGetWidth(self.bounds), 20.0f)];
-        [_textLabel setText:@"Pociągnij w dół aby odświeżyć"];
+        [_textLabel setText:NSLocalizedString(@"Pociągnij w dół aby odświeżyć", @"pull to refresh text")];
         [_textLabel setFont:[UIFont boldSystemFontOfSize:10.0f]];
         [_textLabel setTextAlignment:NSTextAlignmentCenter];
         [_textLabel setBackgroundColor:[UIColor clearColor]];
@@ -46,7 +46,7 @@
     [_textLabel setFrame:CGRectMake(0, floorf(15.0f + (30.0f * progress)), CGRectGetWidth(self.bounds), 20.0f)];
     
     if (progress >= 1.0f) {
-        [_textLabel setText:@"Upuść aby odświeżyć"];
+        [_textLabel setText:NSLocalizedString(@"Upuść aby odświeżyć", @"pull to refresh text")];
     }
     [_textLabel setNeedsDisplay];
 }
@@ -71,7 +71,8 @@
     _state = state;
     
     if (state == BSPullToRefreshOpened) {
-        [_textLabel setText:@"Odświeżanie"];
+        [_delegate bPullToRefreshWantsReloadData:self];
+        [_textLabel setText:NSLocalizedString(@"Odświeżanie", @"pull to refresh text")];
         [self startAnimating];
         _isAnimating = YES;
     } else if (_isAnimating == YES) {

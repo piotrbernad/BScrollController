@@ -14,7 +14,7 @@
 #define animationTime 0.25f
 #define translationAccelerate 1.2f
 
-@interface BSViewController () <UIGestureRecognizerDelegate>
+@interface BSViewController () <UIGestureRecognizerDelegate, BPullToRefreshDelegate>
 
 @end
 
@@ -320,9 +320,14 @@ typedef enum {
     if (_pullToRefresh) {
         [_pullToRefresh removeFromSuperview];
     }
-    
+
     _pullToRefresh = [[BSPullToRefreshView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 80.0f)];
+    [_pullToRefresh setDelegate:self];
     [self.view insertSubview:_pullToRefresh belowSubview:_collectionViewController.collectionView];
+}
+
+- (void)bPullToRefreshWantsReloadData:(BSPullToRefreshView *)sender {
+    NSLog(@"reload");
 }
 
 - (void)addSnapshotViewOnTopWithDirection:(BSScrollDirection)direction {

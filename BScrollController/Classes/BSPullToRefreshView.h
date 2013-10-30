@@ -14,12 +14,19 @@ typedef enum {
     BSPullToRefreshOpened
 } BSPullToRefreshState;
 
+@class BSPullToRefreshView;
+
+@protocol BPullToRefreshDelegate <NSObject>
+- (void)bPullToRefreshWantsReloadData:(BSPullToRefreshView *)sender;
+@end
+
 @interface BSPullToRefreshView : UIView {
     BSPullToRefreshState _state;
 }
 
 @property (strong, nonatomic) UILabel *textLabel;
 @property (strong, nonatomic) UIView *iconView;
+@property (strong, nonatomic) id <BPullToRefreshDelegate> delegate;
 
 // progress value from 0 to 1 
 - (void)setProgress:(CGFloat)progress;
@@ -31,6 +38,3 @@ typedef enum {
 
 @end
 
-@protocol BPullToRefreshDelegate <NSObject>
-- (void)bPullToRefreshWantsReloadData:(BSPullToRefreshView *)sender;
-@end
