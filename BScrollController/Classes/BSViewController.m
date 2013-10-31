@@ -32,6 +32,7 @@ typedef enum {
     
     BOOL _collectionHasItemsToShow;
     BOOL _isOnTop;
+    BOOL _disablePullToRefresh;
     
     BSScrollDirection _scrollDirection;
     UIImageView *_snapshotView;
@@ -240,6 +241,10 @@ typedef enum {
 
 - (void)handlePanGestureToPullToRefresh:(UIPanGestureRecognizer *)sender {
     
+    if (self.isPullToRefreshDisabled) {
+        return;
+    }
+    
     // if snapshot exist remove it from super to show pull to refresh view
     if (_snapshotView) {
         [self removeSnapshotViewFromSuperView];
@@ -370,6 +375,14 @@ typedef enum {
         default:
             break;
     }
+}
+
+- (void)setDisablePullToRefresh:(BOOL)disablePullToRefresh {
+    _disablePullToRefresh = disablePullToRefresh;
+}
+
+- (BOOL)isPullToRefreshDisabled {
+    return _disablePullToRefresh;
 }
 
 - (UIImage *)makeImageFromCurrentView {

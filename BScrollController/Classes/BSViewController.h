@@ -16,7 +16,7 @@
 
 // to override
 - (void)addPullToRefreshView;
-
+@property (assign, nonatomic, getter = isPullToRefreshDisabled) BOOL disablePullToRefresh;
 @property (strong, nonatomic) BSCollectionViewController *collectionViewController;
 @property (strong, nonatomic) BSPullToRefreshView *pullToRefresh;
 @property (strong, nonatomic) id<UICollectionViewDelegate, UICollectionViewDataSource> collectionViewDelegate;
