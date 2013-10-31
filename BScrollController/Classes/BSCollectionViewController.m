@@ -15,6 +15,7 @@
 
 @implementation BSCollectionViewController {    
     NSInteger _beforeChangeIndex;
+    NSInteger _itemsPerPage;
 }
 
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
@@ -43,6 +44,8 @@
 
 - (NSArray *)visibleItems {
     NSIndexSet *indexes;
+    
+    _itemsPerPage = [_scollDataSource numberOfItemsForPageAtIndex:_currentPage];
     
     if ((_currentPage * _itemsPerPage) + _itemsPerPage < [_items count]) {
         indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_currentPage * _itemsPerPage, _itemsPerPage)];

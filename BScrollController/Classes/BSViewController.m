@@ -12,9 +12,11 @@
 
 #define minTranslateYToSkip 0.35
 #define animationTime 0.25f
-#define translationAccelerate 1.2f
+#define translationAccelerate 1.3f
 
-@interface BSViewController () <UIGestureRecognizerDelegate, BPullToRefreshDelegate>
+#define IOS_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+@interface BSViewController () <UIGestureRecognizerDelegate, BPullToRefreshDelegate, BScrollDataSource>
 
 @end
 
@@ -33,6 +35,7 @@ typedef enum {
     
     BSScrollDirection _scrollDirection;
     UIImageView *_snapshotView;
+    UIImageView *_currentlyVisibleScreenSnapshot;
 }
 
 - (void)viewDidLoad
@@ -46,6 +49,10 @@ typedef enum {
     _snapshotsArray = [[NSMutableArray alloc] init];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -63,12 +70,20 @@ typedef enum {
         [_collectionViewController.collectionView setDelegate:_collectionViewDelegate];
         [_collectionViewController.collectionView setDataSource:_collectionViewDelegate];
         [_collectionViewController.collectionView setScrollEnabled:NO];
+        [_collectionViewController setScollDataSource:self];
     }
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
     CGPoint translation = [gestureRecognizer translationInView:self.view];
-    return abs(translation.y) + 5.0f > abs(translation.x);
+    if (abs(translation.y) + 5.0f > abs(translation.x)) {
+        _currentlyVisibleScreenSnapshot = [[UIImageView alloc] initWithImage:[self makeImageFromCurrentView]];
+        [_currentlyVisibleScreenSnapshot setFrame:self.view.bounds];
+        [_currentlyVisibleScreenSnapshot setHidden:YES];
+        [self.view addSubview:_currentlyVisibleScreenSnapshot];
+        return YES;
+    }
+    return NO;
 }
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)sender {
@@ -337,6 +352,11 @@ typedef enum {
     
     switch (direction) {
         case BSScrollDirectionFromBottomToTop:
+            if (_currentlyVisibleScreenSnapshot) {
+                _snapshotView = _currentlyVisibleScreenSnapshot;
+                [_snapshotView setHidden:NO];
+                break;
+            }
             _snapshotView = [[UIImageView alloc] initWithImage:[self makeImageFromCurrentView]];
             [_snapshotView setFrame:self.view.bounds];
             break;
@@ -344,24 +364,40 @@ typedef enum {
             if ([_snapshotsArray lastObject]) {
                 _snapshotView = [[UIImageView alloc] initWithImage:[_snapshotsArray lastObject]];
                 [_snapshotView setFrame:CGRectMake(0, -CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
+                [self.view addSubview:_snapshotView];
             }
             break;
         default:
             break;
     }
-    [self.view addSubview:_snapshotView];
-    
 }
-
 
 - (UIImage *)makeImageFromCurrentView {
-    UIGraphicsBeginImageContextWithOptions(self.view.frame.size, NO, [[UIScreen mainScreen] scale]);
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return viewImage;
-}
+    CGSize imageSize = self.view.frame.size;
 
+    if (IOS_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    } else {
+        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 1);
+    }
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, self.view.center.x, self.view.center.y);
+    CGContextConcatCTM(context, self.view.transform);
+    CGContextTranslateCTM(context, -self.view.bounds.size.width * self.view.layer.anchorPoint.x, -self.view.bounds.size.height * self.view.layer.anchorPoint.y);
+    if ([self.view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+        [self.view drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
+    } else {
+        [self.view.layer renderInContext:context];
+    }
+    CGContextRestoreGState(context);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 
 
 @end

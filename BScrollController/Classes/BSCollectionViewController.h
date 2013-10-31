@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BScrollDataSource <NSObject>
+@required
+- (NSInteger)numberOfItemsForPageAtIndex:(NSInteger)pageNumber;
+@end
+
 @interface BSCollectionViewController : UIViewController
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *items;
 @property (readonly, nonatomic) NSInteger currentPage;
-@property (assign, nonatomic) NSInteger itemsPerPage;
+@property (strong, nonatomic) id<BScrollDataSource> scollDataSource;
 
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout;
 
