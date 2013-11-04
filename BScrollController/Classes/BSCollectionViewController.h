@@ -11,6 +11,7 @@
 @protocol BScrollDataSource <NSObject>
 @required
 - (NSInteger)numberOfItemsForPageAtIndex:(NSInteger)pageNumber;
+- (NSArray *)itemsForPage:(NSInteger)page;
 @end
 
 @interface BSCollectionViewController : UIViewController

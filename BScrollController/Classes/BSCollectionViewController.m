@@ -43,18 +43,10 @@
 }
 
 - (NSArray *)visibleItems {
-    NSIndexSet *indexes;
     
-    _itemsPerPage = [_scollDataSource numberOfItemsForPageAtIndex:_currentPage];
+    NSArray *array = [self.scollDataSource itemsForPage:_currentPage];
     
-    if ((_currentPage * _itemsPerPage) + _itemsPerPage < [_items count]) {
-        indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_currentPage * _itemsPerPage, _itemsPerPage)];
-    } else {
-        NSInteger _itemsOnPage = _items.count - _currentPage * _itemsPerPage;
-        indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(_currentPage * _itemsPerPage, _itemsOnPage)];
-    }
-    
-    return [_items objectsAtIndexes:indexes];
+    return array;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -65,7 +57,7 @@
     _beforeChangeIndex = _currentPage;
     switch (forward) {
         case YES:
-            if ((_currentPage + 1) * _itemsPerPage < [_items count]) {
+            if ([self.scollDataSource numberOfItemsForPageAtIndex:_currentPage + 1] > 0) {
                 _currentPage++;
                 [self.collectionView reloadData];
                 break;
